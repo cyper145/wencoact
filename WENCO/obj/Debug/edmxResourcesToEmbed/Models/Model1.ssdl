@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BDWENCOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="dk_rol_users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_id" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="rol_id" Type="int" Nullable="false" />
+    <Property Name="cod_empresa" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="dk_roles">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="description" Type="varchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="dk_users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="user" Type="varchar" MaxLength="50" />
+    <Property Name="password" Type="varchar" MaxLength="50" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="firstname" Type="varchar" MaxLength="50" />
+    <Property Name="lastname" Type="varchar" MaxLength="50" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="address" Type="varchar" MaxLength="150" />
+    <Property Name="phone1" Type="varchar" MaxLength="20" />
+    <Property Name="phone2" Type="varchar" MaxLength="20" />
+    <Property Name="date_of_birth" Type="varchar" MaxLength="50" />
+    <Property Name="photo" Type="varchar" MaxLength="150" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+    <Property Name="token" Type="varchar" MaxLength="50" />
+    <Property Name="isactive" Type="int" />
+    <Property Name="last_login" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_dk_rol_users_dk_roles">
+    <End Role="dk_roles" Type="Self.dk_roles" Multiplicity="1" />
+    <End Role="dk_rol_users" Type="Self.dk_rol_users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dk_roles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="dk_rol_users">
+        <PropertyRef Name="rol_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dk_rol_users_dk_users">
+    <End Role="dk_users" Type="Self.dk_users" Multiplicity="1" />
+    <End Role="dk_rol_users" Type="Self.dk_rol_users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dk_users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="dk_rol_users">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BDWENCOModelStoreContainer">
+    <EntitySet Name="dk_rol_users" EntityType="Self.dk_rol_users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="dk_roles" EntityType="Self.dk_roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="dk_users" EntityType="Self.dk_users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_dk_rol_users_dk_roles" Association="Self.FK_dk_rol_users_dk_roles">
+      <End Role="dk_roles" EntitySet="dk_roles" />
+      <End Role="dk_rol_users" EntitySet="dk_rol_users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dk_rol_users_dk_users" Association="Self.FK_dk_rol_users_dk_users">
+      <End Role="dk_users" EntitySet="dk_users" />
+      <End Role="dk_rol_users" EntitySet="dk_rol_users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

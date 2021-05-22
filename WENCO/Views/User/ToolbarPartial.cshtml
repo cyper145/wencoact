@@ -1,0 +1,82 @@
+﻿@(Html.DevExpress().GridView<WENCO.Models.dk_users>(settings => {
+    settings.Name = "grid";
+    settings.CallbackRouteValues = new { Controller = "Customization", Action = "ToolbarPartial" };
+    settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Customization", Action = "ToolbarAddNewPartial" };
+    settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Customization", Action = "ToolbarUpdatePartial" };
+    settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Customization", Action = "ToolbarDeletePartial" };
+    settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
+    settings.Toolbars.Add(tb => {
+        tb.Enabled = true;
+        tb.Position = GridToolbarPosition.Top;
+        tb.SettingsAdaptivity.Enabled = true;
+        tb.SettingsAdaptivity.EnableCollapseRootItemsToIcons = true;
+
+        tb.Items.Add(GridViewToolbarCommand.New);
+        tb.Items.Add(GridViewToolbarCommand.Edit);
+        tb.Items.Add(GridViewToolbarCommand.Delete);
+        tb.Items.Add(i => {
+            i.Command = GridViewToolbarCommand.Refresh;
+            i.BeginGroup = true;
+            i.AdaptivePriority = 2;
+        });
+        tb.Items.Add(i => {
+            i.Text = "Export to";
+            i.Image.IconID = DevExpress.Web.ASPxThemes.IconID.ActionsDownload16x16office2013;
+            i.BeginGroup = true;
+            i.AdaptivePriority = 1;
+            i.Items.Add(GridViewToolbarCommand.ExportToPdf);
+            i.Items.Add(GridViewToolbarCommand.ExportToDocx);
+            i.Items.Add(GridViewToolbarCommand.ExportToRtf);
+            i.Items.Add(GridViewToolbarCommand.ExportToXls).Text = "Export to XLS(DataAware)";
+            i.Items.Add(exportitem => {
+                exportitem.Name = "CustomExportToXLS";
+                exportitem.Text = "Export to XLS(WYSIWYG)";
+                exportitem.Image.IconID = DevExpress.Web.ASPxThemes.IconID.ExportExporttoxls16x16office2013;
+            });
+            i.Items.Add(GridViewToolbarCommand.ExportToXlsx).Text = "Export to XLSX(DataAware)";
+            i.Items.Add(exportitem => {
+                exportitem.Name = "CustomExportToXLSX";
+                exportitem.Text = "Export to XLSX(WYSIWYG)";
+                exportitem.Image.IconID = DevExpress.Web.ASPxThemes.IconID.ExportExporttoxlsx16x16office2013;
+            });
+        });
+        tb.Items.Add(i => {
+            i.Alignment = MenuItemAlignment.Right;
+            i.SetTemplateContent(c => {
+                Html.DevExpress().ButtonEdit(s => {
+                    s.Name = "search";
+                    s.Properties.NullText = "Search...";
+                    s.Properties.Buttons
+                        .Add()
+                        .Image.IconID = DevExpress.Web.ASPxThemes.IconID.FindFind16x16gray;
+                }).Render();
+            });
+        });
+    });
+
+    settings.ClientSideEvents.ToolbarItemClick = "OnToolbarItemClick";
+
+    settings.KeyFieldName = WENCO.Code.Helpers.GridViewToolbarHelper.KeyFieldName;
+    settings.Columns.Assign(WENCO.Code.Helpers.GridViewToolbarHelper.ExportedColumns);
+    settings.EditFormLayoutProperties.ColCount = 2;
+    settings.EditFormLayoutProperties.Items.Add(i => i.address);
+    settings.EditFormLayoutProperties.Items.Add(i => i.user);
+    settings.EditFormLayoutProperties.Items.Add(i => i.email);
+    settings.EditFormLayoutProperties.Items.Add(i => i.password);
+    settings.EditFormLayoutProperties.Items.Add(i => i.date_of_birth);
+    settings.EditFormLayoutProperties.Items.Add(i => i.firstname);
+    settings.EditFormLayoutProperties.Items.AddCommandItem(i => {
+        i.ColumnSpan = 2;
+        i.HorizontalAlign = FormLayoutHorizontalAlign.Right;
+    });
+
+    settings.SettingsSearchPanel.CustomEditorName = "search";
+    settings.SettingsBehavior.AllowFocusedRow = true;
+
+    settings.SettingsExport.EnableClientSideExportAPI = true;
+    settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.DataAware;
+
+    settings.Width = Unit.Percentage(100);
+
+    WENCO.Code.Helpers.GridViewFeaturesHelper.SetupGlobalGridViewBehavior(settings);
+}).Bind(Model).SetEditErrorText(ViewBag.EditError).GetHtml())

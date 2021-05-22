@@ -1,0 +1,1 @@
+<%@ Application Codebehind="Global.asax.cs" Inherits="WENCO.MvcApplication" Language="C#" %>

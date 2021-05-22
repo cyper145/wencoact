@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BDWENCOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="dk_rol_users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="user_id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="rol_id" Type="int" Nullable="false" />
+          <Property Name="cod_empresa" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="dk_roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="dk_users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="user" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="firstname" Type="varchar" MaxLength="50" />
+          <Property Name="lastname" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="address" Type="varchar" MaxLength="150" />
+          <Property Name="phone1" Type="varchar" MaxLength="20" />
+          <Property Name="phone2" Type="varchar" MaxLength="20" />
+          <Property Name="date_of_birth" Type="varchar" MaxLength="50" />
+          <Property Name="photo" Type="varchar" MaxLength="150" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+          <Property Name="token" Type="varchar" MaxLength="50" />
+          <Property Name="isactive" Type="int" />
+          <Property Name="last_login" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_dk_rol_users_dk_roles">
+          <End Role="dk_roles" Type="Self.dk_roles" Multiplicity="1" />
+          <End Role="dk_rol_users" Type="Self.dk_rol_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dk_roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dk_rol_users">
+              <PropertyRef Name="rol_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dk_rol_users_dk_users">
+          <End Role="dk_users" Type="Self.dk_users" Multiplicity="1" />
+          <End Role="dk_rol_users" Type="Self.dk_rol_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dk_users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dk_rol_users">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDWENCOModelStoreContainer">
+          <EntitySet Name="dk_rol_users" EntityType="Self.dk_rol_users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dk_roles" EntityType="Self.dk_roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dk_users" EntityType="Self.dk_users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dk_rol_users_dk_roles" Association="Self.FK_dk_rol_users_dk_roles">
+            <End Role="dk_roles" EntitySet="dk_roles" />
+            <End Role="dk_rol_users" EntitySet="dk_rol_users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dk_rol_users_dk_users" Association="Self.FK_dk_rol_users_dk_users">
+            <End Role="dk_users" EntitySet="dk_users" />
+            <End Role="dk_rol_users" EntitySet="dk_rol_users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BDWENCOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="dk_rol_users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rol_id" Type="Int32" Nullable="false" />
+          <Property Name="cod_empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="dk_roles" Relationship="Self.FK_dk_rol_users_dk_roles" FromRole="dk_rol_users" ToRole="dk_roles" />
+          <NavigationProperty Name="dk_users" Relationship="Self.FK_dk_rol_users_dk_users" FromRole="dk_rol_users" ToRole="dk_users" />
+        </EntityType>
+        <EntityType Name="dk_roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="dk_rol_users" Relationship="Self.FK_dk_rol_users_dk_roles" FromRole="dk_roles" ToRole="dk_rol_users" />
+        </EntityType>
+        <EntityType Name="dk_users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="phone1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="phone2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="date_of_birth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="photo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <Property Name="token" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isactive" Type="Int32" />
+          <Property Name="last_login" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="dk_rol_users" Relationship="Self.FK_dk_rol_users_dk_users" FromRole="dk_users" ToRole="dk_rol_users" />
+        </EntityType>
+        <Association Name="FK_dk_rol_users_dk_roles">
+          <End Role="dk_roles" Type="Self.dk_roles" Multiplicity="1" />
+          <End Role="dk_rol_users" Type="Self.dk_rol_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dk_roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dk_rol_users">
+              <PropertyRef Name="rol_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dk_rol_users_dk_users">
+          <End Role="dk_users" Type="Self.dk_users" Multiplicity="1" />
+          <End Role="dk_rol_users" Type="Self.dk_rol_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dk_users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dk_rol_users">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDWENCOEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="dk_rol_users" EntityType="Self.dk_rol_users" />
+          <EntitySet Name="dk_roles" EntityType="Self.dk_roles" />
+          <EntitySet Name="dk_users" EntityType="Self.dk_users" />
+          <AssociationSet Name="FK_dk_rol_users_dk_roles" Association="Self.FK_dk_rol_users_dk_roles">
+            <End Role="dk_roles" EntitySet="dk_roles" />
+            <End Role="dk_rol_users" EntitySet="dk_rol_users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dk_rol_users_dk_users" Association="Self.FK_dk_rol_users_dk_users">
+            <End Role="dk_users" EntitySet="dk_users" />
+            <End Role="dk_rol_users" EntitySet="dk_rol_users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BDWENCOModelStoreContainer" CdmEntityContainer="BDWENCOEntities2">
+          <EntitySetMapping Name="dk_rol_users">
+            <EntityTypeMapping TypeName="BDWENCOModel.dk_rol_users">
+              <MappingFragment StoreEntitySet="dk_rol_users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="rol_id" ColumnName="rol_id" />
+                <ScalarProperty Name="cod_empresa" ColumnName="cod_empresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dk_roles">
+            <EntityTypeMapping TypeName="BDWENCOModel.dk_roles">
+              <MappingFragment StoreEntitySet="dk_roles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dk_users">
+            <EntityTypeMapping TypeName="BDWENCOModel.dk_users">
+              <MappingFragment StoreEntitySet="dk_users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone1" ColumnName="phone1" />
+                <ScalarProperty Name="phone2" ColumnName="phone2" />
+                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="token" ColumnName="token" />
+                <ScalarProperty Name="isactive" ColumnName="isactive" />
+                <ScalarProperty Name="last_login" ColumnName="last_login" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

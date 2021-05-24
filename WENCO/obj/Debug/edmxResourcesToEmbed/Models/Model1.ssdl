@@ -22,7 +22,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="user" Type="varchar" MaxLength="50" />
+    <Property Name="username" Type="varchar" MaxLength="50" />
     <Property Name="password" Type="varchar" MaxLength="50" />
     <Property Name="name" Type="varchar" MaxLength="50" />
     <Property Name="firstname" Type="varchar" MaxLength="50" />

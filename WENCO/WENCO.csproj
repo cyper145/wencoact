@@ -302,6 +302,7 @@
     <Content Include="Views\User\ToolbarPartial.cshtml" />
     <Content Include="Views\Customization\Toolbar.cshtml" />
     <Content Include="Views\Customization\ToolbarPartial.cshtml" />
+    <Content Include="Views\Customization\LeftPanelPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -318,6 +319,7 @@
     <Compile Include="Code\Helpers\GridViewExportMethod.cs" />
     <Compile Include="Code\Helpers\GridViewFeaturesHelper.cs" />
     <Compile Include="Code\Helpers\GridViewToolbarHelper.cs" />
+    <Compile Include="conexion\conexion.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\BaseController.cs" />

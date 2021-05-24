@@ -24,7 +24,7 @@
       <EntityTypeMapping TypeName="BDWENCOModel.dk_users">
         <MappingFragment StoreEntitySet="dk_users">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="user" ColumnName="user" />
+          <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="password" ColumnName="password" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="firstname" ColumnName="firstname" />

@@ -1,5 +1,4 @@
-﻿using DevExpress.Web.Demos.Mvc;
-using DevExpress.Web.Mvc;
+﻿using DevExpress.Web.Mvc;
 
 namespace WENCO.Code.Helpers
 {
@@ -33,11 +32,19 @@ namespace WENCO.Code.Helpers
         {
             var columns = new MVCxGridViewColumnCollection();
             columns.Add("name");
-           
-            columns.Add("user");
-            
-            columns.Add("lastname", MVCxGridViewColumnType.SpinEdit);
-            columns.Add("email", MVCxGridViewColumnType.CheckBox);
+            columns.Add("username");
+            columns.Add("password");
+            columns.Add("firstname", MVCxGridViewColumnType.TextBox);
+            columns.Add("lastname", MVCxGridViewColumnType.TextBox);
+            columns.Add("email", MVCxGridViewColumnType.TextBox);
+            columns.Add("address", MVCxGridViewColumnType.TextBox);
+            columns.Add("phone1", MVCxGridViewColumnType.TextBox);
+            columns.Add("phone2", MVCxGridViewColumnType.TextBox);
+            columns.Add("date_of_birth", MVCxGridViewColumnType.TextBox);
+            columns.Add("photo", MVCxGridViewColumnType.TextBox);
+            columns.Add("created_at", MVCxGridViewColumnType.TextBox);
+            columns.Add("updated_at", MVCxGridViewColumnType.TextBox);
+            columns.Add("isactive", MVCxGridViewColumnType.TextBox);
             return columns;
         }
 

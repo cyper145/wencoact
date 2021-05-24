@@ -1,5 +1,9 @@
-﻿}
+﻿
 
+
+@section LeftPanelContent {
+    @Html.Partial("LeftPanelPartial")
+}
 @using (Html.BeginForm("ExportTo", "Customization"))
 {
     @Html.Hidden("customExportCommand")

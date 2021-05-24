@@ -55,7 +55,7 @@ namespace WENCO.Controllers
             {
 
                 WENCO.Models.dk_users user = new Models.dk_users();
-                user.user = model.UserName;
+                user.username = model.UserName;
                 user.name = model.UserName;
                 user.firstname = model.FirstName;
                 user.address = model.Address;

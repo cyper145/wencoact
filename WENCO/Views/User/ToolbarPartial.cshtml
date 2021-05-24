@@ -59,15 +59,24 @@
     settings.KeyFieldName = WENCO.Code.Helpers.GridViewToolbarHelper.KeyFieldName;
     settings.Columns.Assign(WENCO.Code.Helpers.GridViewToolbarHelper.ExportedColumns);
     settings.EditFormLayoutProperties.ColCount = 2;
-    settings.EditFormLayoutProperties.Items.Add(i => i.address);
-    settings.EditFormLayoutProperties.Items.Add(i => i.user);
-    settings.EditFormLayoutProperties.Items.Add(i => i.email);
-    settings.EditFormLayoutProperties.Items.Add(i => i.password);
-    settings.EditFormLayoutProperties.Items.Add(i => i.date_of_birth);
+    settings.EditFormLayoutProperties.AlignItemCaptions = true;
+
+
+    settings.EditFormLayoutProperties.Items.Add(i => i.username );
+    settings.EditFormLayoutProperties.Items.Add(i => i.name);
     settings.EditFormLayoutProperties.Items.Add(i => i.firstname);
+    settings.EditFormLayoutProperties.Items.Add(i => i.lastname);
+    settings.EditFormLayoutProperties.Items.Add(i => i.email);
+    settings.EditFormLayoutProperties.Items.Add(i => i.address);
+    settings.EditFormLayoutProperties.Items.Add(i => i.phone1);
+    settings.EditFormLayoutProperties.Items.Add(i => i.phone2);
+    settings.EditFormLayoutProperties.Items.Add(i => i.photo );
+    settings.EditFormLayoutProperties.Items.Add(i => i.password);
+    settings.EditFormLayoutProperties.Items.Add(i=>i.confirmpassword);
     settings.EditFormLayoutProperties.Items.AddCommandItem(i => {
         i.ColumnSpan = 2;
         i.HorizontalAlign = FormLayoutHorizontalAlign.Right;
+
     });
 
     settings.SettingsSearchPanel.CustomEditorName = "search";

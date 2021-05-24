@@ -26,7 +26,7 @@ namespace WENCO.Controllers
         }
         public ActionResult DemoView(string actionName, string viewName, object model)
         {
-      //      Utils.RegisterCurrentMvcDemo(Name, actionName);
+            //      Utils.RegisterCurrentMvcDemo(Name, actionName);
             return (model != null) ? View(viewName, model) : View(viewName);
         }
 
